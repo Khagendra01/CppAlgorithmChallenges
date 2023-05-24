@@ -24,7 +24,7 @@ int fibDP(int n)
     }
 }
 
-int fibPrint(int n)
+int fibRec(int n)
 {
     fibCache = new int[n];
     for (int i = 0; i <= n; i++)
@@ -35,8 +35,27 @@ int fibPrint(int n)
     return fibCache[n];
 }
 
+int fibIter(int n)
+{
+
+    int prev = 0;
+    int current = 1;
+
+    int next;
+
+    for (int i = 2; i <= n; i++)
+    {
+        int next = current + prev;
+        prev = current;
+        current = next;
+    }
+
+    return current;
+}
+
 int main()
 {
-    cout << fibPrint(7);
+    cout << fibRec(7) << "\n";
+    cout << fibIter(7);
     return 0;
 }
