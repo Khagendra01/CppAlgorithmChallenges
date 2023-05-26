@@ -13,7 +13,7 @@ int minED(string f, string s, int fL, int sL)
     {
         return fL;
     }
-    if (f[fL] == s[sL])
+    if (f[fL - 1] == s[sL - 1])
     {
         return minED(f, s, fL - 1, sL - 1);
     }
@@ -45,7 +45,7 @@ int recMinEDDP(string f, string s, int fL, int sL)
 
         int inst = 1 + recMinEDDP(f, s, fL - 1, sL);
         int del = 1 + recMinEDDP(f, s, fL, sL - 1);
-        int mismat = recMinEDDP(f, s, fL - 1, sL - 1) + ((f[fL] == s[sL]) ? 0 : 1);
+        int mismat = recMinEDDP(f, s, fL - 1, sL - 1) + ((f[fL - 1] == s[sL - 1]) ? 0 : 1);
 
         dpMem[fL][sL] = min(inst, min(del, mismat));
     }
@@ -73,8 +73,8 @@ int recMinEDDyp(string f, string s, int fL, int sL)
 int main()
 {
 
-    string first = "APPLE";
-    string second = "BDDLE";
+    string first = "KAPPLE";
+    string second = "KBDDLE";
 
     cout << minED(first, second, first.size(), second.size()) << "\n";
     cout << recMinEDDyp(first, second, first.size(), second.size());
