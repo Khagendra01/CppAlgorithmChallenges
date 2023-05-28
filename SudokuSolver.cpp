@@ -4,9 +4,9 @@ using namespace std;
 
 void printBoard(vector<vector<string>> value)
 {
-    for (int i = 0; i < value.size(); i++)
+    for (int i = 0; i < N; i++)
     {
-        for (int j = 0; j < value[0].size(); j++)
+        for (int j = 0; j < N; j++)
         {
             cout << value[i][j] << "  ";
         }
@@ -14,7 +14,7 @@ void printBoard(vector<vector<string>> value)
     }
 }
 
-bool isValid(vector<vector<string>> value, int R, int C, int V)
+bool isValid(vector<vector<string>>& value, int R, int C, int V)
 {
     for (int i = 0; i < N; i++)
     {
@@ -22,7 +22,7 @@ bool isValid(vector<vector<string>> value, int R, int C, int V)
         {
             return false;
         }
-        if (value[i][V] == to_string(V))
+        if (value[i][C] == to_string(V))
         {
             return false;
         }
@@ -35,7 +35,7 @@ bool isValid(vector<vector<string>> value, int R, int C, int V)
     {
         for (int j = 0; j < 3; j++)
         {
-            if (value[a + i][b + i] == to_string(V))
+            if (value[a + i][b + j] == to_string(V))
             {
                 return false;
             }
@@ -45,10 +45,10 @@ bool isValid(vector<vector<string>> value, int R, int C, int V)
     return true;
 }
 
-bool solveSudoku(vector<vector<string>> value, int R, int C)
+bool solveSudoku(vector<vector<string>>& value, int R, int C)
 {
 
-    if ((C == N) && (R - 1 == N))
+    if ((C == N) && (R == N - 1))
     {
         return true;
     }
@@ -94,6 +94,8 @@ int main()
         {"0", "0", "0", "0", "8", "0", "0", "7", "9"}};
 
     printBoard(value);
+
+    cout << "\n \n \n \n";
 
     if (solveSudoku(value, 0, 0))
     {
