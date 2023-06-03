@@ -79,9 +79,28 @@ int coinChange(vector<int> &coins, int amount)
     return coinDP(coins, amount, DP);
 }
 
+int coinChangeIte(vector<int> &coins, int amount)
+{
+    vector<int> DP(amount + 1, amount + 1);
+
+    DP[0] = 0;
+
+    for(int i = 1; i<= amount; i++)
+    {
+        for(int coin: coins)
+        {
+            if(coin <= i)
+            {
+                DP[i] = min(DP[i], DP[i-coin] + 1) ;
+            }
+        }
+    }
+    return amount < DP[amount] ? -1: DP[amount];
+}
+
 int main()
 {
     vector<int> coins = {1, 2, 5};
-    cout << coinChange(coins, 11);
+    cout << coinChangeIte(coins, 11);
     return 0;
 }
