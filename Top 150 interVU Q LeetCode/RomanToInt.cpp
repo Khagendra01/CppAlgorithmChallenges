@@ -12,7 +12,6 @@ int romanToInt(string s)
             if (i == 0)
             {
                 val += 1000;
-                
             }
             else
             {
@@ -20,7 +19,9 @@ int romanToInt(string s)
                 {
                     val += 900;
                     cout << "yes" << val << "\n";
-                }else{
+                }
+                else
+                {
                     val += 1000;
                 }
             }
@@ -37,13 +38,15 @@ int romanToInt(string s)
                 if (s[i - 1] == 'C')
                 {
                     val += 400;
-                }else{
+                }
+                else
+                {
                     val += 500;
                 }
             }
         }
 
-          if (s[i] == 'C')
+        if (s[i] == 'C')
         {
             if (i == 0)
             {
@@ -54,7 +57,9 @@ int romanToInt(string s)
                 if (s[i - 1] == 'X')
                 {
                     val += 90;
-                }else{
+                }
+                else
+                {
                     val += 100;
                 }
             }
@@ -71,13 +76,15 @@ int romanToInt(string s)
                 if (s[i - 1] == 'X')
                 {
                     val += 40;
-                }else{
+                }
+                else
+                {
                     val += 50;
                 }
             }
         }
 
-          if (s[i] == 'X')
+        if (s[i] == 'X')
         {
             if (i == 0)
             {
@@ -88,7 +95,9 @@ int romanToInt(string s)
                 if (s[i - 1] == 'I')
                 {
                     val += 9;
-                }else{
+                }
+                else
+                {
                     val += 10;
                 }
             }
@@ -105,20 +114,47 @@ int romanToInt(string s)
                 if (s[i - 1] == 'I')
                 {
                     val += 4;
-                }else{
+                }
+                else
+                {
                     val += 5;
                 }
             }
         }
-        if(s[i] == 'I')
+        if (s[i] == 'I')
         {
             val += 1;
         }
     }
 }
 
+int romanToIntII(string s)
+{
+    map<char, int> myMap;
+    myMap['I'] = 1;
+    myMap['V'] = 5;
+    myMap['X'] = 10;
+    myMap['L'] = 50;
+    myMap['C'] = 100;
+    myMap['D'] = 500;
+    myMap['M'] = 1000;
+
+    int val = 0;
+
+    for(int i = 0; i < s.size(); i++)
+    {
+        if( i > 0 && myMap[s[i]] > myMap[s[i-1]])
+        {
+            val += myMap[s[i]] - (2 * myMap[s[i - 1]]);
+            continue; 
+        }
+        val += myMap[s[i]];
+    }
+    return val;
+}
+
 int main()
 {
-    cout << romanToInt("MCMXCIV");
+    cout << romanToIntII("MCMXCIV");
     return 0;
 }
